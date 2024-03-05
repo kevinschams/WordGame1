@@ -1,0 +1,55 @@
+<div class="min-h-screen flex justify-center bg-gray-50 pt-10 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-md h-3/4 w-full space-y-8 p-10 bg-white shadow-md rounded-lg">
+      <h1 class="mt-6 text-center text-3xl font-extrabold text-gray-900">Register</h1>
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="mt-8 space-y-6">
+  
+        <div class="rounded-md shadow-sm -space-y-px">
+          <div>
+            <label for="username" class="sr-only">Username</label>
+            <input type="text" formControlName="username" placeholder="Email address" required
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   [ngClass]="{ 'border-red-500': submitted && f['username'].errors }" />
+            <div *ngIf="submitted && f['username'].errors" class="text-red-500 text-xs p-1">
+              <div *ngIf="f['username'].errors['required']">Username is required</div>
+            </div>
+          </div>
+          <div>
+            <label for="password" class="sr-only">Password</label>
+            <input type="password" formControlName="password" placeholder="Password" required
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   [ngClass]="{ 'border-red-500': submitted && f['password'].errors }" />
+            <div *ngIf="submitted && f['password'].errors" class="text-red-500 text-xs p-1">
+              <div *ngIf="f['password'].errors['required']">Password is required</div>
+            </div>
+          </div>
+          <div>
+            <label for="repeatPassword" class="sr-only">Repeat Password</label>
+            <input type="password" formControlName="repeatPassword" placeholder="Repeat Password" required
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   [ngClass]="{ 'border-red-500': submitted && f['repeatPassword'].errors }" />
+            <div *ngIf="submitted && f['repeatPassword'].errors" class="text-red-500 text-xs p-1">
+              <div *ngIf="!f['repeatPassword'].errors['match']">Passwords do not match</div>
+            </div>
+          </div>
+        </div>
+  
+        <div>
+          <button type="submit" [disabled]="loading"
+                  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Create an account
+          </button>
+          <div *ngIf="errors.length > 0" class="text-red-500 text-sm mt-1 p-1">
+            <ul>
+                <li *ngFor="let error of errors">{{ error }}</li>
+            </ul>
+          </div>
+        
+        </div>
+  
+        <div class="text-sm text-center">
+          <p>Already have an account? <a [routerLink]="['/auth/login']" class="font-medium text-indigo-600 hover:text-indigo-500">Login</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+  
