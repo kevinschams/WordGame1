@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
                 this.signupForm.reset();
             }else{
                 this._router.navigate([this.returnUrl]);
+                // console.log(data);
             }
               
           },

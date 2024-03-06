@@ -58,56 +58,59 @@ export class LoginComponent implements OnInit {
       email: this.f['username'].value, 
       password: this.f['password'].value
     }
+    console.log(credentials);
 
     this.loading = true;
-    this._authService.login(credentials)
-        .pipe(first())
-        .subscribe(
-            data => {                                     
-                if(!data){  
-                    this.loading = false;
-                    this.loginForm.reset();
-                }else{
-                    this._router.navigate([this.returnUrl]);
-                    // this._router.navigate(["../../../components/home/home.component.html"]);
-                }
+    // this._authService.login(credentials)
+    //     .pipe(first())
+    //     .subscribe(
+    //         data => {                                     
+    //             if(!data){  
+    //                 this.loading = false;
+    //                 this.loginForm.reset();
+    //             }else{
+    //                 this._router.navigate([this.returnUrl]);
+    //                 // this._router.navigate(["../../../components/home/home.component.html"]);
+    //             }
  
-            },
-            (errResp) => {              
-              if (errResp.error instanceof Array) {
-                // If it's an array, assume it contains error messages directly
-                this.errors = errResp.error;
-              } else if (errResp.error.message) {
-                  // If there's a message property, use it
-                  this.errors.push(errResp.error.message);
-              } else {
-                  // Fallback error message
-                  this.errors.push("An error occurred during login. Please try again.");
-              }
-              this.loading = false;
-            });
-// this._authService.login(credentials)
-//   .pipe(first())
-//   .subscribe({
-//     next: (data: User) => {
-//       if (!data) {
-//         this.loading = false;
-//         this.loginForm.reset();
-//       } else {
-//         this._router.navigate([this.returnUrl]);
-//       }
-//     },
-//     error: (errResp) => {
-//       if (errResp.error instanceof Array) {
-//         this.errors = errResp.error;
-//       } else if (errResp.error.message) {
-//         this.errors.push(errResp.error.message);
-//       } else {
-//         this.errors.push("An error occurred during login. Please try again.");
-//       }
-//       this.loading = false;
-//     }
-//   });
+    //         },
+    //         (errResp) => {              
+    //           if (errResp.error instanceof Array) {
+    //             // If it's an array, assume it contains error messages directly
+    //             this.errors = errResp.error;
+    //           } else if (errResp.error.message) {
+    //               // If there's a message property, use it
+    //               this.errors.push(errResp.error.message);
+    //           } else {
+    //               // Fallback error message
+    //               this.errors.push("An error occurred during login. Please try again.");
+    //           }
+    //           this.loading = false;
+            // });
+
+
+this._authService.login(credentials)
+  .pipe(first())
+  .subscribe({
+    next: (data: User) => {
+      if (!data) {
+        this.loading = false;
+        this.loginForm.reset();
+      } else {
+        this._router.navigate([this.returnUrl]);
+      }
+    },
+    error: (errResp) => {
+      if (errResp.error instanceof Array) {
+        this.errors = errResp.error;
+      } else if (errResp.error.message) {
+        this.errors.push(errResp.error.message);
+      } else {
+        this.errors.push("An error occurred during login. Please try again.");
+      }
+      this.loading = false;
+    }
+  });
 
 
     }
