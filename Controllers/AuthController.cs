@@ -42,6 +42,7 @@ namespace UserLoginApp.Namespace
         [AllowAnonymous]
         [HttpPost("login")]
         public async Task<IActionResult> Login(EmailLoginDetails details) {
+            Console.WriteLine(details);
             var user = await _userManager.FindByEmailAsync(details.Email);
 
             if(null == user) {

@@ -39,8 +39,10 @@ export class AuthService {
   }
 
   public register(details: EmailLoginDetails): Observable<User>{
+    console.log(details);
     return this._http.post<User>(`/api/auth/register`, details)
             .pipe(tap(user => {
+              // console.log(user + "!!!!");
               return user;
             }));
             
