@@ -554,7 +554,6 @@ C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJEC
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\ClientApp\tsconfig.app.json
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\ClientApp\tsconfig.json
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\ClientApp\tsconfig.spec.json
-C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\app.db
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\WordGame.staticwebassets.runtime.json
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\WordGame.exe
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\WordGame.deps.json
@@ -812,9 +811,10 @@ C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJEC
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\scopedcss\bundle\WordGame.styles.css
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\scopedcss\projectbundle\WordGame.bundle.scp.css
-C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.csproj.CopyComplete
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.dll
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\refint\WordGame.dll
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.pdb
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.genruntimeconfig.cache
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\ref\WordGame.dll
+C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.csproj.Up2Date
+C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\app.db

@@ -1,12 +1,13 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { GameService } from '../../services/gameService';
+import { GameService } from '../../auth/services/gameService';
 import { GameDto } from '../../models/gameDto';
 import { Observable, of } from 'rxjs';
 import { CommonModule, NgFor } from '@angular/common';
+import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-wordgame',
   standalone: true,
-  imports: [NgFor, CommonModule],
+  imports: [NgFor, CommonModule, RouterModule],
   templateUrl: './wordgame.component.html',
   styleUrl: './wordgame.component.css'
 })
@@ -66,6 +67,9 @@ export class WordgameComponent implements OnInit{
       }
     );
   }
+
+}
+
   // private _gameService: GameService = inject(GameService);
   // public game: Observable<GameDto | null> = of(null);
   // // public isLoggedIn: boolean = false;
@@ -74,4 +78,3 @@ export class WordgameComponent implements OnInit{
   //   // throw new Error('Method not implemented.');
     
   // }
-}

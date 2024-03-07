@@ -1,0 +1,15 @@
+<div class="flex flex-col items-center justify-center">
+    
+    <p class="mb-2">Guesses remaining: {{ guessesRemaining }}</p>
+    <h4>Correct Guesses:</h4>
+    <ul>
+      <li *ngFor="let guess of correctGuesses">{{ guess }}</li>
+    </ul>
+    <input type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+    <div *ngFor="let game of games" class="mb-4">
+        <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4" (click)="makeGuess(game.gameId)">Guess</button>
+    </div>
+    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4">Guess</button>
+    
+  </div>
+  

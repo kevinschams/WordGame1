@@ -5,11 +5,13 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
 
 import { AuthGuard } from './utilities/auth.guard';
 import { WordgameComponent } from './components/wordgame/wordgame.component';
+import { GameViewComponent } from './components/game-view/game-view.component';
 
 export const routes: Routes = [
     { path: '', component: HomeComponent },    
     { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-    { path: 'wordgame', component: WordgameComponent, canActivate: [AuthGuard]},    
+    { path: 'wordgame', component: WordgameComponent, canActivate: [AuthGuard]},  
+    { path: 'gameview', component: GameViewComponent, canActivate: [AuthGuard]},  
 
     { path: '**', component: PageNotFoundComponent },
 ];

@@ -10,5 +10,5 @@ public class ApplicationDbContext : IdentityDbContext
         : base(options)
     {
     }
-    // public DbSet<Game> Games { get; set; }
+    public DbSet<Game> Games { get; set; }
 }

@@ -2,7 +2,7 @@
     
     <div class="flex justify-center mb-4">
         <!-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Game</button> -->
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4" (click)="createNewGame()">New Game</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4" (click)="createNewGame()" [routerLink]="['/gameview']">New Game</button>
       </div>
     <table class="table-auto border-collapse w-full">
       <thead class="bg-gray-200">
@@ -18,14 +18,14 @@
       <tbody>
         <tr *ngFor="let game of games" class="text-center">
           <td class="border px-4 py-2">{{ game.gameId }}</td>
-          <!-- <td class="border px-4 py-2">{{ game.phrase }}</td> -->
           <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
-          <!-- <td class="border px-4 py-2">{{ game.answer }}</td> -->
+          <td class="border px-4 py-2">{{ game.guesses }}</td>
+          <td class="border px-4 py-2">{{ game.view }}</td>
           <td class="border px-4 py-2">{{ game.status }}</td>
           <td class="border px-4 py-2">
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 (click)="deleteGame(game.gameId)">Delete</button>
-        </td> 
+          </td> 
         </tr>
       </tbody>
     </table>
