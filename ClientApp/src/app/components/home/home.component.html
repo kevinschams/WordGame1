@@ -1,14 +1,23 @@
 <div class="container mx-auto p-4">
     <div class="text-center">
-        <h1 class="text-4xl font-bold my-4">Welcome to Our Website!</h1>
-        <div *ngIf="user | async as curUser">
-            <h2>User Id: {{curUser.id}}</h2>
-            <h2>Username: {{curUser.userName}}</h2>
+
+                
+        <div *ngIf="!isLoggedIn">
+            <h1 class="text-4xl font-bold my-4"><u>Word Game</u></h1>
+            <h1 class="text-2xl my-4">Welcome to word game!</h1>
+            <p>Please <a [routerLink]="['auth/login']" class="text-blue-500 hover:font-bold">login</a> or <a [routerLink]="['auth/register']" class="text-blue-500 hover:font-bold">register</a> to play</p>
         </div>
 
-        <!-- <div *ngIf="user">
-            <h2>User Id: {{user.id}}</h2>
-            <h2>Username: {{user.userName}}</h2>
-        </div> -->
+
+        
+        <div *ngIf="user | async as curUser">
+            <h1 class="text-4xl font-bold my-4"><u>Word Game</u></h1>
+            <h2>Welcome back, {{curUser.userName}}!</h2>
+            <!-- take to the word game page -->
+            <h2><a [routerLink]="['/wordgame']" class="text-blue-500 hover:font-bold">Ready to continue playing?</a></h2>
+
+        </div>
+
+
     </div>
 </div>

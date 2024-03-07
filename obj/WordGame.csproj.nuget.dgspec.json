@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\kevin\\OneDrive\\Desktop\\FOURTH_SEM\\WordGame1\\WordGame.csproj": {}
+    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\kevin\\OneDrive\\Desktop\\FOURTH_SEM\\WordGame1\\WordGame.csproj": {
+    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\kevin\\OneDrive\\Desktop\\FOURTH_SEM\\WordGame1\\WordGame.csproj",
+        "projectUniqueName": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
         "projectName": "WordGame",
-        "projectPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\FOURTH_SEM\\WordGame1\\WordGame.csproj",
-        "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\FOURTH_SEM\\WordGame1\\obj\\",
+        "projectPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
+        "packagesPath": "C:\\Users\\003035632\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\003035632\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
@@ -32,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -95,7 +90,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.101/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

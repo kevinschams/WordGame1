@@ -47,12 +47,13 @@ namespace UserLoginApp.Namespace
             if(null == user) {
                 return BadRequest();
             }
-
+            Console.WriteLine(JsonSerializer.Serialize(details));
             var result = await _signInManager.PasswordSignInAsync(details.Email, details.Password, false, false)
                                                 .ConfigureAwait(false);
                         
         // if I remove the not operator this code works so idk what is going on with this tbh, sumn with the server endpoints probably.
-            if(!result.Succeeded) {                             
+            if(!result.Succeeded) {  
+                Console.WriteLine(JsonSerializer.Serialize(result));                           
                 return Unauthorized();
             }
 

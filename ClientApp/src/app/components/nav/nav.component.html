@@ -3,7 +3,7 @@
         <div class="flex justify-between items-center">
             <div>
                 <a class="text-white hover:cursor-pointer" [routerLink]="['/']">Home</a>
-                <a *ngIf="isLoggedIn" class="text-white hover:cursor-pointer ml-4" [routerLink]="['/test']">Test</a>
+                <a *ngIf="isLoggedIn" class="text-white hover:cursor-pointer ml-4" [routerLink]="['/wordgame']">Word Game</a>
             </div>
             <div *ngIf="!isLoggedIn">
                 <a class="text-white hover:cursor-pointer ml-4" [routerLink]="['auth/register']">Register</a>
