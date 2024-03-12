@@ -32,6 +32,8 @@ export class WordgameComponent implements OnInit{
     );
   }
 
+
+
   createNewGame(): void {
     this.gameService.createNewGame().subscribe(
       game => {
@@ -70,11 +72,3 @@ export class WordgameComponent implements OnInit{
 
 }
 
-  // private _gameService: GameService = inject(GameService);
-  // public game: Observable<GameDto | null> = of(null);
-  // // public isLoggedIn: boolean = false;
-
-  // ngOnInit(): void {
-  //   // throw new Error('Method not implemented.');
-    
-  // }

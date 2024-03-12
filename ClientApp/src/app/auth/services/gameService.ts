@@ -8,25 +8,26 @@ import { GameDto } from '../../models/gameDto';
 })
 export class GameService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private _http: HttpClient) { }
 
   getAllGames(): Observable<GameDto[]> {
-    return this.http.get<GameDto[]>('/api/gameplay');
+    return this._http.get<GameDto[]>('/api/gameplay');
   }
 
   getSingleGame(gameId: number): Observable<GameDto> {
-    return this.http.get<GameDto>(`/api/gameplay/${gameId}`);
+    return this._http.get<GameDto>(`/api/gameplay/${gameId}`);
   }
 
   createNewGame(): Observable<GameDto> {
-    return this.http.post<GameDto>('/api/gameplay', {});
+    return this._http.post<GameDto>('/api/gameplay', {});
   }
 
   makeGuess(gameId: number, guess: string): Observable<GameDto> {
-    return this.http.post<GameDto>(`/api/gameplay/${gameId}/guesses?guess=${guess}`, {});
+    return this._http.post<GameDto>(`/api/gameplay/${gameId}/guesses?guess=${guess}`, {});
   }
 
   deleteGame(gameId: number): Observable<any> {
-    return this.http.delete(`/api/gameplay/${gameId}`);
+    return this._http.delete(`/api/gameplay/${gameId}`);
   }
 }
+
