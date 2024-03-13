@@ -16,7 +16,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let game of games" class="text-center">
+        <tr *ngFor="let game of games | async" class="text-center">
           <td class="border px-4 py-2">{{ game.gameId }}</td>
           <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
           <td class="border px-4 py-2">{{ game.guesses }}</td>

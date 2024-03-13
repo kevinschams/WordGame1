@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Authorization;
 using WordGame.Models;
 using System.Text.Json;
+
 namespace UserLoginApp.Namespace
 {
     [Authorize]
@@ -14,10 +15,7 @@ namespace UserLoginApp.Namespace
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
 
-        public AuthController(
-            SignInManager<IdentityUser> signInManager,
-            UserManager<IdentityUser> userManager 
-        ) {
+        public AuthController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager ) {
             _signInManager = signInManager;
             _userManager = userManager;
         }
