@@ -11,7 +11,7 @@ export const routes: Routes = [
     { path: '', component: HomeComponent },    
     { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
     { path: 'wordgame', component: WordgameComponent, canActivate: [AuthGuard]},  
-    { path: 'gameview', component: GameViewComponent, canActivate: [AuthGuard]},  
+    { path: 'gameview/:id', component: GameViewComponent, canActivate: [AuthGuard]},  
 
     { path: '**', component: PageNotFoundComponent },
 ];

@@ -1,44 +1,22 @@
-<!-- <div class="flex flex-col items-center justify-center">
-    
-    <p class="mb-2">Guesses remaining: {{ guessesRemaining }}</p>
-    <h4>Correct Guesses:</h4>
-    <ul>
-      <li *ngFor="let guess of correctGuesses">{{ guess }}</li>
-    </ul>
-    <input type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
-    <div *ngFor="let game of games" class="mb-4">
-        <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4" (click)="makeGuess(game.gameId)">Guess</button>
-    </div>
-    <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4">Guess</button>
-    
-  </div> -->
-  
-   <div class="flex flex-col items-center justify-center">
-    
+<div class="flex flex-col items-center justify-center">
+  <div class="game-container">
     <!-- Display Guesses Remaining -->
-    <p>Guesses Remaining: {{ guessesRemaining }}</p>
-    
-    <!-- Display Correct Guesses if not empty -->
-    <h4>Correct Guesses:</h4>
-    <ul>
-        <li *ngFor="let guess of correctGuesses">{{ guess }}</li>
-    </ul>
-    <div *ngFor="let game of games" class="mb-4">
-    
-    <!-- Display Previous Guesses if not empty -->
-    <p *ngIf="game.status !== 'unfinished'">Previous Guesses: {{ correctGuesses }}</p>
-    
-    <!-- Display Answer -->
-    <p *ngIf="game.status !== 'unfinished'">Answer: {{ game.view }}</p>
-    
-    <!-- Display Loss or Win status -->
-    <p *ngIf="game.status === 'loss'" style="color: red;">Loss</p>
-    <p *ngIf="game.status === 'win'" style="color: green;">Win</p>
-    
-    <!-- Display Input for Guesses if game is unfinished -->
-    <input *ngIf="game.status === 'unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
-    
-    <!-- Display Guess Button if game is unfinished -->
-    <button *ngIf="game.status === 'unfinished'" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 mb-4" (click)="makeGuess(game.gameId)">Guess</button>
+    <p *ngIf="currentGame && currentGame.status === 'Unfinished'" class="mb-2">Guesses Remaining: {{ guessesRemaining }}</p>
+
+    <!-- Display Unfinished Word -->
+    <p *ngIf="currentGame && currentGame.status === 'Unfinished'" class="mb-2">Unfinished Word: {{ currentGame.view }}</p>
+
+    <!-- Input for Guess -->
+    <input *ngIf="currentGame && currentGame.status === 'Unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+
+    <!-- Guess Button -->
+    <button *ngIf="currentGame && currentGame.status === 'Unfinished'" (click)="makeGuess(games[0].gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
+    <!-- <p>{{currentGame?.gameId}}{{currentGame?.status}}</p> -->
+    <p *ngIf="currentGame && currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
+    <p *ngIf="currentGame && currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
   </div>
 </div>
+
+
+
+  

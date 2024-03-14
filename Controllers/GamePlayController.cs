@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
+using System.Security.Claims;
 
 namespace WordGame.Controllers
 {
@@ -17,24 +18,34 @@ namespace WordGame.Controllers
     public class GamePlayController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<IdentityUser> _userManager;
         private readonly WordList _wordList;
 
-        public GamePlayController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+
+        public GamePlayController(ApplicationDbContext context, UserManager<IdentityUser> userManager)
         {
+
             _context = context;
             _userManager = userManager;
 
             // Load word list from JSON file
-            string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wordList.json");
+            // string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wordlist.json");
+            string jsonFilePath = "../WordGame1/Assets/wordlist.json";
+            // Console.WriteLine(jsonFilePath);
             string json = System.IO.File.ReadAllText(jsonFilePath);
             _wordList = JsonSerializer.Deserialize<WordList>(json);
+            // _wordList = ReadWordList();
         }
+        // private static ReadWordList(){
+        //     string jsonContent = System.IO.File.ReadAllText(jsonFilePath);
+        //     return JsonSerializer.Deserialize<WordList>(jsonContent);
+        // }
 
         [HttpGet]
         public IActionResult GetAllGames()
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            // var userId = _userManager.GetUserId(User);
             var games = _context.Games.Where(g => g.ApplicationUserId == userId).Select(g => new GameDto
             {
                 GameId = g.GameId,
@@ -50,7 +61,8 @@ namespace WordGame.Controllers
         [HttpGet("{gameId}")]
         public IActionResult GetSingleGame(int gameId)
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            // var userId = _userManager.GetUserId(User);
             var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
             if (game == null)
                 return NotFound(); // Game not found or not owned by the user
@@ -69,16 +81,17 @@ namespace WordGame.Controllers
         [HttpPost]
         public IActionResult CreateNewGame()
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            // var userId = _userManager.GetUserId(User);
             var random = new Random();
-            var difficulty = "easy"; // Adjust as needed based on your game logic
+            var difficulty = "medium"; // Adjust as needed based on your game logic
             var targetList = GetWordList(difficulty);
             var target = targetList[random.Next(0, targetList.Count)];
 
             var game = new Game
             {
                 ApplicationUserId = userId,
-                Status = "Unfinished",
+                // Status = "Unfinished",
                 Target = target,
                 Guesses = "",
                 View = new string('_', target.Length),
@@ -99,38 +112,98 @@ namespace WordGame.Controllers
             };
 
             return CreatedAtAction(nameof(GetSingleGame), new { gameId = game.GameId }, gameDto);
+            // return Ok(gameDto);
         }
 
         [HttpPost("{gameId}/guesses")]
-        public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
+public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
+{
+    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+    var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
+    if (game == null)
+        return NotFound(); // Game not found or not owned by the user
+
+    // Check if the guess is correct and update the view property
+    var target = game.Target.ToLower();
+    var guessChar = char.ToLower(guess[0]);
+    var viewChars = game.View.ToCharArray();
+    bool found = false;
+    for (int i = 0; i < target.Length; i++)
+    {
+        if (target[i] == guessChar)
         {
-            var userId = _userManager.GetUserId(User);
-            var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
-            if (game == null)
-                return NotFound(); // Game not found or not owned by the user
-            
-            // Process the guess here and update the game state accordingly
-            // This part should be implemented based on your game logic
-            
-            _context.SaveChanges();
-
-            var gameDto = new GameDto
-            {
-                GameId = game.GameId,
-                ApplicationUserId = game.ApplicationUserId,
-                Status = game.Status,
-                Guesses = game.Guesses,
-                View = game.View,
-                RemainingGuesses = game.RemainingGuesses
-            };
-
-            return Ok(gameDto);
+            viewChars[i] = guess[0];
+            found = true;
         }
+    }
+
+    // Update game state based on guess
+    if (!found)
+    {
+        game.RemainingGuesses--;
+    }
+
+    // Update game view and status
+    game.View = new string(viewChars);
+    if (game.View == target)
+    {
+        game.Status = "Win";
+    }
+    else if (game.RemainingGuesses == 0)
+    {
+        game.Status = "Loss";
+    }
+
+    // Save changes to the database
+    _context.SaveChanges();
+
+    // Create a new GameDto object with updated properties
+    var gameDto = new GameDto
+    {
+        GameId = game.GameId,
+        ApplicationUserId = game.ApplicationUserId,
+        Status = game.Status,
+        Guesses = game.Guesses,
+        View = game.View,
+        RemainingGuesses = game.RemainingGuesses
+    };
+
+    // Return the updated GameDto object
+    return Ok(gameDto);
+}
+
+        // [HttpPost("{gameId}/guesses")]
+        // public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
+        // {
+        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+        //     // var userId = _userManager.GetUserId(User);
+        //     var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
+        //     if (game == null)
+        //         return NotFound(); // Game not found or not owned by the user
+            
+        //     // Process the guess here and update the game state accordingly
+        //     // This part should be implemented based on your game logic
+            
+        //     _context.SaveChanges();
+
+        //     var gameDto = new GameDto
+        //     {
+        //         GameId = game.GameId,
+        //         ApplicationUserId = game.ApplicationUserId,
+        //         Status = game.Status,
+        //         Guesses = game.Guesses,
+        //         View = game.View,
+        //         RemainingGuesses = game.RemainingGuesses
+        //     };
+
+        //     return Ok(gameDto);
+        // }
 
         [HttpDelete("{gameId}")]
         public IActionResult DeleteGame(int gameId)
         {
-            var userId = _userManager.GetUserId(User);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+            // var userId = _userManager.GetUserId(User);
             var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
             if (game == null)
                 return NotFound(); // Game not found or not owned by the user
