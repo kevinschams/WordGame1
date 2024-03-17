@@ -7251,19 +7251,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\003035632\\.nuget\\packages\\": {}
+    "C:\\Users\\kevin\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
+      "projectUniqueName": "C:\\Users\\kevin\\OneDrive\\Desktop\\FIFTH_SEM\\WordGame1\\WordGame.csproj",
       "projectName": "WordGame",
-      "projectPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
-      "packagesPath": "C:\\Users\\003035632\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\obj\\",
+      "projectPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\FIFTH_SEM\\WordGame1\\WordGame.csproj",
+      "packagesPath": "C:\\Users\\kevin\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\kevin\\OneDrive\\Desktop\\FIFTH_SEM\\WordGame1\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\003035632\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\kevin\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
