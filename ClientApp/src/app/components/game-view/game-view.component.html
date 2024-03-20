@@ -10,9 +10,11 @@
     <button *ngIf="currentGame && currentGame.status === 'Unfinished'" (click)="makeGuess(games[0].gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
 
     <p *ngIf="currentGame && currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
-    <p *ngIf="currentGame && currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
+    <p *ngIf="currentGame$ && currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
   </div>
 </div> -->
+
+
 <div class="flex flex-col items-center justify-center">
   <div class="game-container" *ngIf="(currentGame$ | async) as currentGame">
     <p *ngIf="currentGame.status === 'Unfinished'" class="mb-2">Guesses Remaining: {{ guessesRemaining }}</p>
@@ -21,8 +23,11 @@
     <button *ngIf="currentGame.status === 'Unfinished'" (click)="makeGuess(currentGame.gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
     <p *ngIf="currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
     <p *ngIf="currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
+
   </div>
 </div>
+
+
 
 
 

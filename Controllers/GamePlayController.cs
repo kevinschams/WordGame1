@@ -84,7 +84,7 @@ namespace WordGame.Controllers
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
             // var userId = _userManager.GetUserId(User);
             var random = new Random();
-            var difficulty = "medium"; // Adjust as needed based on your game logic
+            var difficulty = "med"; // Adjust as needed based on your game logic
             var targetList = GetWordList(difficulty);
             var target = targetList[random.Next(0, targetList.Count)];
 
@@ -106,13 +106,13 @@ namespace WordGame.Controllers
                 GameId = game.GameId,
                 ApplicationUserId = game.ApplicationUserId,
                 Status = game.Status,
-                Guesses = game.Guesses,
+                Guesses = game.Target,
                 View = game.View,
                 RemainingGuesses = game.RemainingGuesses
             };
 
-            return CreatedAtAction(nameof(GetSingleGame), new { gameId = game.GameId }, gameDto);
-            // return Ok(gameDto);
+            // return CreatedAtAction(nameof(GetSingleGame), new { gameId = game.GameId }, gameDto);
+            return Ok(gameDto);
         }
 
         [HttpPost("{gameId}/guesses")]

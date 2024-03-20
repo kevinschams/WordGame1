@@ -4,6 +4,7 @@ import { GameDto } from '../../models/gameDto';
 import { Observable, map } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-wordgame',
@@ -13,17 +14,23 @@ import { FormsModule } from '@angular/forms';
 export class WordgameComponent implements OnInit {
   public games$: Observable<GameDto[]>;
 
-  constructor(private gameService: GameService) {
+  
+
+  constructor(private gameService: GameService, private router: Router) {
     this.games$ = this.gameService.getAllGames();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+  
+  }
 
   createNewGame(): void {
     this.gameService.createNewGame().subscribe(
       game => {
-        console.log('New game created: ', game);
+        console.log('New game created: ', game.guesses);
+
         // No need to reload games here as getAllGames() already returns an updated list
+        this.router.navigate(['/gameview/', game.gameId]);
       },
       error => {
         console.error('Error creating new game: ', error);

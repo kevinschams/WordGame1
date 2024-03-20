@@ -12,19 +12,21 @@ import { GameService } from '../../auth/services/gameService';
   styleUrls: ['./game-view.component.css']
 })
 export class GameViewComponent implements OnInit {
+
   currentGame$!: Observable<GameDto | null>;
   guessesRemaining: number = 8;
   currentGuess: string = '';
+  public games$: Observable<GameDto[]>;
 
-  constructor(
-    private gameService: GameService,
-    private route: ActivatedRoute
-  ) { }
+  constructor(private gameService: GameService, private route: ActivatedRoute) {
+    this.games$ = this.gameService.getAllGames();
+   }
 
   ngOnInit(): void {
     this.currentGame$ = this.route.params.pipe(
       switchMap(params => {
         const gameId = +params['id']; 
+        console.log(gameId);
         return gameId ? this.gameService.getSingleGame(gameId) : of(null);
       })
     );
@@ -33,6 +35,7 @@ export class GameViewComponent implements OnInit {
   makeGuess(gameId: number): void {
     this.gameService.makeGuess(gameId, this.currentGuess).subscribe(
       updatedGame => {
+        console.log(this.currentGuess);
         console.log('Guess made: ', updatedGame);
         this.guessesRemaining--;
         if (this.guessesRemaining === 0) {
@@ -48,6 +51,7 @@ export class GameViewComponent implements OnInit {
 
   private updateGameStatus(gameId: number, status: string): void {
     // You can choose to update the game status in your backend as well
+
   }
 }
 

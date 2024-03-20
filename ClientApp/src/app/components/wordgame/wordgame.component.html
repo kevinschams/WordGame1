@@ -21,8 +21,8 @@
         <tr *ngFor="let game of games$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win' }">
           <td class="border px-4 py-2">{{ game.gameId }}</td>
           <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
-          <td class="border px-4 py-2">{{ game.guesses }}</td>
           <td class="border px-4 py-2">{{ game.view }}</td>
+          <td class="border px-4 py-2">{{ game.guesses }}</td>
           <td class="border px-4 py-2">{{ game.status }}</td>
           <td class="border px-4 py-2">
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
@@ -31,6 +31,7 @@
         </tr>
       </tbody>
     </table>
+
   </div>
   
   
