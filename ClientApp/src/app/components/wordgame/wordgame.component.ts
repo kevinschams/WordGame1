@@ -21,13 +21,14 @@ export class WordgameComponent implements OnInit {
   }
 
   ngOnInit(): void {
-  
+    // this.games$ = this.gameService.getAllGames();
   }
+
 
   createNewGame(): void {
     this.gameService.createNewGame().subscribe(
       game => {
-        console.log('New game created: ', game.guesses);
+        // console.log('New game created: ', game.target+"!!");
 
         // No need to reload games here as getAllGames() already returns an updated list
         this.router.navigate(['/gameview/', game.gameId]);

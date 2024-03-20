@@ -8,7 +8,7 @@ import { GameDto } from '../../models/gameDto';
 })
 export class GameService {
   private currentGameSubject: BehaviorSubject<GameDto | null> = new BehaviorSubject<GameDto | null>(null);
-
+  // private apiUrl = 'api/GamePlay';
   constructor(private _http: HttpClient) { }
 
   getCurrentGame(): Observable<GameDto | null> {
@@ -36,14 +36,6 @@ export class GameService {
   public makeGuess(gameId: number, guess: string): Observable<GameDto> {
     return this._http.post<GameDto>(`/api/GamePlay/${gameId}/guesses?guess=${guess}`, {});
   }
-//   public makeGuess(gameId: number, guess: string): Observable<GameDto> {
-//   const url = `/api/GamePlay/${gameId}/guesses?guess=${guess}`;
-//   return this._http.post<GameDto>(url, {}).pipe(
-//     tap(updatedGame => {
-//       this.setCurrentGame(updatedGame); // Update current game after making guess
-//     })
-//   );
-// }
 
 
   public deleteGame(gameId: number): Observable<any> {

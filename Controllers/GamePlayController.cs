@@ -98,17 +98,23 @@ namespace WordGame.Controllers
                 RemainingGuesses = 8
             };
 
+            var word = "";
+            if(game.Status == "Win" || game.Status == "Loss"){
+                word = game.Target;
+            }
             _context.Games.Add(game);
             _context.SaveChanges();
+
 
             var gameDto = new GameDto
             {
                 GameId = game.GameId,
                 ApplicationUserId = game.ApplicationUserId,
                 Status = game.Status,
-                Guesses = game.Target,
+                Guesses = game.Guesses,
                 View = game.View,
-                RemainingGuesses = game.RemainingGuesses
+                RemainingGuesses = game.RemainingGuesses,
+                Target = word
             };
 
             // return CreatedAtAction(nameof(GetSingleGame), new { gameId = game.GameId }, gameDto);
@@ -153,7 +159,11 @@ public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
     {
         game.Status = "Loss";
     }
-
+            
+    var word = "";
+        if(game.Status == "Win" || game.Status == "Loss"){
+            word = game.Target;
+        }
     // Save changes to the database
     _context.SaveChanges();
 
@@ -165,39 +175,13 @@ public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
         Status = game.Status,
         Guesses = game.Guesses,
         View = game.View,
-        RemainingGuesses = game.RemainingGuesses
+        RemainingGuesses = game.RemainingGuesses,
+        Target = word
     };
 
     // Return the updated GameDto object
     return Ok(gameDto);
 }
-
-        // [HttpPost("{gameId}/guesses")]
-        // public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-        //     // var userId = _userManager.GetUserId(User);
-        //     var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
-        //     if (game == null)
-        //         return NotFound(); // Game not found or not owned by the user
-            
-        //     // Process the guess here and update the game state accordingly
-        //     // This part should be implemented based on your game logic
-            
-        //     _context.SaveChanges();
-
-        //     var gameDto = new GameDto
-        //     {
-        //         GameId = game.GameId,
-        //         ApplicationUserId = game.ApplicationUserId,
-        //         Status = game.Status,
-        //         Guesses = game.Guesses,
-        //         View = game.View,
-        //         RemainingGuesses = game.RemainingGuesses
-        //     };
-
-        //     return Ok(gameDto);
-        // }
 
         [HttpDelete("{gameId}")]
         public IActionResult DeleteGame(int gameId)
@@ -233,7 +217,9 @@ public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
                     return _wordList.Easy; // Default to easy if difficulty is not recognized
             }
         }
+
     }
+    
 }
 
 // using Microsoft.AspNetCore.Mvc;

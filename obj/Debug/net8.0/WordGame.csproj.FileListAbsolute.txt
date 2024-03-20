@@ -1091,7 +1091,6 @@ C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJEC
 \\b113-10\c$\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.pdb
 \\b113-10\c$\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\WordGame.genruntimeconfig.cache
 \\b113-10\c$\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\obj\Debug\net8.0\ref\WordGame.dll
-C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\app.db
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\bin\Debug\net8.0\appsettings.Development.json
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\bin\Debug\net8.0\appsettings.json
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\bin\Debug\net8.0\Assets\wordList.json
@@ -1366,3 +1365,5 @@ C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\obj\Debug\net8.0\refint\Word
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\obj\Debug\net8.0\WordGame.pdb
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\obj\Debug\net8.0\WordGame.genruntimeconfig.cache
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\obj\Debug\net8.0\ref\WordGame.dll
+C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\package-lock.json
+C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\PROJECT\WordGame1\bin\Debug\net8.0\app.db

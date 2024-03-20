@@ -1,25 +1,11 @@
-<!-- <div class="flex flex-col items-center justify-center">
-  <div class="game-container">
-  
-    <p *ngIf="currentGame && currentGame.status === 'Unfinished'" class="mb-2">Guesses Remaining: {{ guessesRemaining }}</p>
-
-    <p *ngIf="currentGame && currentGame.status === 'Unfinished'" class="mb-2">Unfinished Word: {{ currentGame.view }}</p>
-
-    <input *ngIf="currentGame && currentGame.status === 'Unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
-
-    <button *ngIf="currentGame && currentGame.status === 'Unfinished'" (click)="makeGuess(games[0].gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
-
-    <p *ngIf="currentGame && currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
-    <p *ngIf="currentGame$ && currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
-  </div>
-</div> -->
-
 
 <div class="flex flex-col items-center justify-center">
-  <div class="game-container" *ngIf="(currentGame$ | async) as currentGame">
-    <p *ngIf="currentGame.status === 'Unfinished'" class="mb-2">Guesses Remaining: {{ guessesRemaining }}</p>
-    <p *ngIf="currentGame.status === 'Unfinished'" class="mb-2">Unfinished Word: {{ currentGame.view }}</p>
-    <input *ngIf="currentGame.status === 'Unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+  <div *ngIf="currentGame" class = "text-center">
+    <h1>{{currentGame.target}}</h1>
+    <br>
+    <h1 *ngIf="currentGame.status === 'Unfinished'" class="mb-2 font-bold text-3xl">Guesses Remaining: {{ guessesRemaining }}</h1>
+    <h1 *ngIf="currentGame.status === 'Unfinished'" class="mb-2 font-bold text-3xl">{{ currentGame.view }}</h1><br>
+    <input *ngIf="currentGame.status === 'Unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"><br>
     <button *ngIf="currentGame.status === 'Unfinished'" (click)="makeGuess(currentGame.gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
     <p *ngIf="currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
     <p *ngIf="currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>

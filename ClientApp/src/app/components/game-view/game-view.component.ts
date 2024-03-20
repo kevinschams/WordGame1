@@ -13,24 +13,33 @@ import { GameService } from '../../auth/services/gameService';
 })
 export class GameViewComponent implements OnInit {
 
-  currentGame$!: Observable<GameDto | null>;
   guessesRemaining: number = 8;
   currentGuess: string = '';
-  public games$: Observable<GameDto[]>;
+  currentGame: GameDto | null = null;
+
 
   constructor(private gameService: GameService, private route: ActivatedRoute) {
-    this.games$ = this.gameService.getAllGames();
+    
    }
-
-  ngOnInit(): void {
-    this.currentGame$ = this.route.params.pipe(
-      switchMap(params => {
-        const gameId = +params['id']; 
-        console.log(gameId);
-        return gameId ? this.gameService.getSingleGame(gameId) : of(null);
-      })
-    );
+   ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      const gameId = +params['id'];
+      if (gameId) {
+        this.gameService.getSingleGame(gameId).subscribe(
+          game => {
+            this.currentGame = game;
+            console.log(this.currentGame);
+          },
+          error => {
+            console.error('Error loading current game: ', error);
+          }
+        );
+      }
+    });
   }
+
+
+
 
   makeGuess(gameId: number): void {
     this.gameService.makeGuess(gameId, this.currentGuess).subscribe(
@@ -38,21 +47,18 @@ export class GameViewComponent implements OnInit {
         console.log(this.currentGuess);
         console.log('Guess made: ', updatedGame);
         this.guessesRemaining--;
-        if (this.guessesRemaining === 0) {
-          this.updateGameStatus(gameId, 'Loss');
-        }
         this.currentGuess = '';
+        updatedGame.guesses = this.guessesRemaining;
+        if(updatedGame.guesses == 0){
+          updatedGame.status = "Loss";
+        }
       },
       error => {
         console.error('Error making guess: ', error);
       }
     );
   }
-
-  private updateGameStatus(gameId: number, status: string): void {
-    // You can choose to update the game status in your backend as well
-
-  }
+  
 }
 
 @NgModule({

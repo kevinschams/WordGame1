@@ -11,7 +11,7 @@ using WordGame.Data;
 namespace WordGame.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240314183938_initialMigration")]
+    [Migration("20240320194021_initialMigration")]
     partial class initialMigration
     {
         /// <inheritdoc />

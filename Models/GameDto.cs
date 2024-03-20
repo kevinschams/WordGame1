@@ -12,4 +12,5 @@ public class GameDto
     public string View { get; set; }
     
     public int RemainingGuesses { get; set; }
+    public string Target { get; set; }
 }
