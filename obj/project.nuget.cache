@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NEVY7rzk25Gawd0WJBGYSLJiFSGZTmjZnT6kPFb5eMFcx8MR4nBuzeZa4WFXXGPJS8d9gZGcXBtnDfOc8M9scw==",
+  "dgSpecHash": "QJBIhSNc3N9WaO4n0JxneL6r06iEqFg+WQf0urKTPZ+rEAU5fYI4aBp8hRoBrrJfkd8OS65HAXZikysI8ddZqw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
+  "projectFilePath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\WordGame.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\003035632\\.nuget\\packages\\humanizer\\2.14.1\\humanizer.2.14.1.nupkg.sha512",
     "C:\\Users\\003035632\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",

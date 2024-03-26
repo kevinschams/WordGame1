@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj": {}
+    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\WordGame.csproj": {}
   },
   "projects": {
-    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj": {
+    "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\WordGame.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
+        "projectUniqueName": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\WordGame.csproj",
         "projectName": "WordGame",
-        "projectPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\WordGame.csproj",
+        "projectPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\WordGame.csproj",
         "packagesPath": "C:\\Users\\003035632\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\PROJECT\\WordGame1\\obj\\",
+        "outputPath": "C:\\Users\\003035632\\OneDrive - Western Wisconsin Technical College\\Desktop\\asp_dotnet\\asp_dotnet_spring_2024_student\\WordGame1\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\003035632\\AppData\\Roaming\\NuGet\\NuGet.Config"
