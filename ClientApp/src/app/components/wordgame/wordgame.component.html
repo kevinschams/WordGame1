@@ -1,8 +1,9 @@
+
+
 <div class="container mx-auto p-4">
     
     <div class="flex justify-center mb-4">
-        <!-- <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">New Game</button> -->
-        <!-- [routerLink]="['/gameview']" -->
+
         <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mb-4" (click)="createNewGame()">New Game</button>
       </div>
     <table class="table-auto border-collapse w-full">
@@ -17,8 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- (click)="navigateToGame(game.gameId)" -->
-        <tr *ngFor="let game of games$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win' }">
+        <tr *ngFor="let game of gameList$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win' }">
           <td class="border px-4 py-2">{{ game.gameId }}</td>
           <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
           <td class="border px-4 py-2">{{ game.view }}</td>

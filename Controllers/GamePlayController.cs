@@ -38,22 +38,46 @@ namespace WordGame.Controllers
         }
 
 
+        // [HttpGet]
+        // public IActionResult GetAllGames()
+        // {
+        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
+        //     // var userId = _userManager.GetUserId(User);
+
+        //     var games = _context.Games.Where(g => g.ApplicationUserId == userId).Select(g => new GameDto
+        //     {
+        //         GameId = g.GameId,
+        //         ApplicationUserId = g.ApplicationUserId,
+        //         Status = g.Status,
+        //         Guesses = g.Guesses,
+        //         View = g.View,
+        //         RemainingGuesses = g.RemainingGuesses,
+        //         Target = g.Target
+        //     }).ToList();
+        //     return Ok(games);
+        // }
         [HttpGet]
         public IActionResult GetAllGames()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            // var userId = _userManager.GetUserId(User);
-            var games = _context.Games.Where(g => g.ApplicationUserId == userId).Select(g => new GameDto
-            {
-                GameId = g.GameId,
-                ApplicationUserId = g.ApplicationUserId,
-                Status = g.Status,
-                Guesses = g.Guesses,
-                View = g.View,
-                RemainingGuesses = g.RemainingGuesses
-            }).ToList();
+
+            var games = _context.Games
+                .Where(g => g.ApplicationUserId == userId)
+                .Select(g => new GameDto
+                {
+                    GameId = g.GameId,
+                    ApplicationUserId = g.ApplicationUserId,
+                    Status = g.Status,
+                    Guesses = g.Guesses,
+                    View = g.View,
+                    RemainingGuesses = g.RemainingGuesses,
+                    Target = g.Status == "Win" || g.Status == "Loss" ? g.Target : null // Only include the Target property if status is 'Win' or 'Loss'
+                })
+                .ToList();
+
             return Ok(games);
         }
+
 
         [HttpGet("{gameId}")]
         public IActionResult GetSingleGame(int gameId)
@@ -70,7 +94,8 @@ namespace WordGame.Controllers
                 Status = game.Status,
                 Guesses = game.Guesses,
                 View = game.View,
-                RemainingGuesses = game.RemainingGuesses
+                RemainingGuesses = game.RemainingGuesses,
+                Target = game.Status == "Win" || game.Status == "Loss" ? game.Target : null
             };
             return Ok(gameDto);
         }
@@ -119,66 +144,67 @@ namespace WordGame.Controllers
         }
 
         [HttpPost("{gameId}/guesses")]
-public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
-{
-    var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
-    var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
-    if (game == null)
-        return NotFound(); // Game not found or not owned by the user
-
-    // Check if the guess is correct and update the view property
-    var target = game.Target.ToLower();
-    var guessChar = char.ToLower(guess[0]);
-    var viewChars = game.View.ToCharArray();
-    bool found = false;
-    for (int i = 0; i < target.Length; i++)
+    public IActionResult MakeGuess(int gameId, [FromQuery] string guess)
     {
-        if (target[i] == guessChar)
+        var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
+        if (game == null)
+            return NotFound(); // Game not found or not owned by the user
+
+        // Check if the guess is correct and update the view property
+        var target = game.Target.ToLower();
+        var guessChar = char.ToLower(guess[0]);
+        var viewChars = game.View.ToCharArray();
+        bool found = false;
+        for (int i = 0; i < target.Length; i++)
         {
-            viewChars[i] = guess[0];
-            found = true;
+            if (target[i] == guessChar)
+            {
+                viewChars[i] = guess[0];
+                found = true;
+            }
         }
-    }
 
-    // Update game state based on guess
-    if (!found)
-    {
-        game.RemainingGuesses--;
-    }
-
-    // Update game view and status
-    game.View = new string(viewChars);
-    if (game.View == target)
-    {
-        game.Status = "Win";
-    }
-    else if (game.RemainingGuesses == 0)
-    {
-        game.Status = "Loss";
-    }
-            
-    var word = "";
-        if(game.Status == "Win" || game.Status == "Loss"){
-            word = game.Target;
+        // Update game state based on guess
+        // if (!found)
+        if(true)
+        {
+            game.RemainingGuesses--;
         }
-    // Save changes to the database
-    _context.SaveChanges();
 
-    // Create a new GameDto object with updated properties
-    var gameDto = new GameDto
-    {
-        GameId = game.GameId,
-        ApplicationUserId = game.ApplicationUserId,
-        Status = game.Status,
-        Guesses = game.Guesses,
-        View = game.View,
-        RemainingGuesses = game.RemainingGuesses,
-        Target = word
-    };
+        // Update game view and status
+        game.View = new string(viewChars);
+        if (game.View == game.Target)
+        {
+            game.Status = "Win";
+        }
+        else if (game.RemainingGuesses == 0)
+        {
+            game.Status = "Loss";
+        }
+                
+        var word = "";
+            if(game.Status == "Win" || game.Status == "Loss"){
+                word = game.Target;
+            }
+        // Save changes to the database
+        _context.SaveChanges();
 
-    // Return the updated GameDto object
-    return Ok(gameDto);
-}
+        // Create a new GameDto object with updated properties
+        var gameDto = new GameDto
+        {
+            GameId = game.GameId,
+            ApplicationUserId = game.ApplicationUserId,
+            Status = game.Status,
+            Guesses = game.Guesses,
+            View = game.View,
+            RemainingGuesses = game.RemainingGuesses,
+            Target = word
+        };
+
+        // Return the updated GameDto object
+        return Ok(gameDto);
+    }
 
         [HttpDelete("{gameId}")]
         public IActionResult DeleteGame(int gameId)

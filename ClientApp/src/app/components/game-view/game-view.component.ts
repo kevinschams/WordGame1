@@ -1,10 +1,11 @@
-// import { NgModule, Component, OnInit } from '@angular/core';
-// import { FormsModule } from '@angular/forms';
-// import { CommonModule } from '@angular/common';
+// import { Component, EventEmitter, NgModule, OnInit, inject } from '@angular/core';
 // import { ActivatedRoute } from '@angular/router';
-// import { Observable, of, switchMap } from 'rxjs';
+// import { Observable, Subscription, of } from 'rxjs';
+// import { switchMap } from 'rxjs/operators';
 // import { GameDto } from '../../models/gameDto';
 // import { GameService } from '../../auth/services/gameService';
+// import { CommonModule } from '@angular/common';
+// import { FormsModule } from '@angular/forms';
 
 // @Component({
 //   selector: 'app-game-view',
@@ -13,52 +14,78 @@
 // })
 // export class GameViewComponent implements OnInit {
 
+//   private _gameService = inject(GameService);
+
 //   guessesRemaining: number = 8;
+  
 //   currentGuess: string = '';
-//   currentGame: GameDto | null = null;
 
 
-//   constructor(private gameService: GameService, private route: ActivatedRoute) {
-    
-//    }
-//    ngOnInit(): void {
-//     this.route.params.subscribe(params => {
-//       const gameId = +params['id'];
-//       if (gameId) {
-//         this.gameService.getSingleGame(gameId).subscribe(
-//           game => {
-//             this.currentGame = game;
-//             console.log(this.currentGame);
-//           },
-//           error => {
-//             console.error('Error loading current game: ', error);
-//           }
-//         );
-//       }
-//     });
+//   public currentGame$: Observable<GameDto[] | []> = this._gameService.currentGame$;
+//   // currentGame$: Observable<GameDto | null>;
+
+
+//   constructor(private route: ActivatedRoute) {}
+
+//   ngOnInit(): void {
+//     this.getSingleGame();
+//   }
+  
+//   public getSingleGame(): void{
+//     this.route.params.pipe(
+//       switchMap(params => {
+//         const gameId = +params['id'];
+//         console.log(this._gameService.getSingleGame(gameId));
+//         return gameId ? this._gameService.getSingleGame(gameId) : of([]);
+//       })
+//     )
+//     // this._gameService.getSingleGame();
 //   }
 
-
 //   makeGuess(gameId: number): void {
-//     this.gameService.makeGuess(gameId, this.currentGuess).subscribe(
+//     this._gameService.makeGuess(gameId, this.currentGuess).subscribe(
 //       updatedGame => {
-//         console.log(this.currentGuess);
 //         console.log('Guess made: ', updatedGame);
 //         this.guessesRemaining--;
 //         this.currentGuess = '';
+
 //         updatedGame.guesses = this.guessesRemaining;
-//         if(updatedGame.guesses == 0){
-//           updatedGame.status = "Loss";
+//         // updatedGame.status = this.status;
+        
+//         if (updatedGame.guesses === 0) {
+//           updatedGame.status = 'Loss';
 //         }
+//         // Update currentGame$ observable with the updated game
+//         // this.currentGame$ = of(updatedGame);
+
+//         this.currentGame$.subscribe(game => {
+//           console.log(game);
+//         })
+        
+//         // console.log(this.currentGame$);
 //       },
 //       error => {
 //         console.error('Error making guess: ', error);
 //       }
 //     );
 //   }
-  
 // }
 
+
+
+// @NgModule({
+//   declarations: [
+//     GameViewComponent
+//   ],
+//   imports: [
+//     CommonModule,
+//     FormsModule
+//   ],
+//   exports: [
+//     GameViewComponent
+//   ]
+// })
+// export class GameViewModule { }
 import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable, of } from 'rxjs';
@@ -74,22 +101,33 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./game-view.component.css']
 })
 export class GameViewComponent implements OnInit {
+
   private _gameService = inject(GameService);
 
   guessesRemaining: number = 8;
+  // endTarget: string = '';
+  
   currentGuess: string = '';
-  public currentGame$: Observable<GameDto | null> = this._gameService.currentGame$;
-  // currentGame$: Observable<GameDto | null>;
+
+  // Change the type of currentGame$ to Observable<GameDto | null>
+  public currentGame$: Observable<GameDto | null> = of(null);
 
   constructor(private route: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.currentGame$ = this.route.params.pipe(
+    this.getSingleGame();
+  }
+  
+  public getSingleGame(): void {
+    this.route.params.pipe(
       switchMap(params => {
         const gameId = +params['id'];
-        return gameId ? this._gameService.getSingleGame(gameId) : of(null);
+        return gameId ? this._gameService.getSingleGame(gameId) : of(null); // Return null if gameId is falsy
       })
-    )
+    ).subscribe(game => {
+      // Set currentGame$ with the emitted game
+      this.currentGame$ = of(game);
+    });
   }
 
   makeGuess(gameId: number): void {
@@ -98,10 +136,23 @@ export class GameViewComponent implements OnInit {
         console.log('Guess made: ', updatedGame);
         this.guessesRemaining--;
         this.currentGuess = '';
+        // console.log(updatedGame.g)
+        // updatedGame.remainingGuesses--;
+        
+        // this.guessesRemaining = updatedGame.remainingGuesses;
+        console.log(updatedGame.target);
+        // this.endTarget = updatedGame.target;
         updatedGame.guesses = this.guessesRemaining;
+        // console.log(updatedGame.remainingGuesses);
+        // console.log(updatedGame.guesses);
+        // console.log(this.guessesRemaining);
+
         if (updatedGame.guesses === 0) {
           updatedGame.status = 'Loss';
         }
+
+        // Update currentGame$ observable with the updated game
+        this.currentGame$ = of(updatedGame);
       },
       error => {
         console.error('Error making guess: ', error);
@@ -109,8 +160,6 @@ export class GameViewComponent implements OnInit {
     );
   }
 }
-
-
 
 @NgModule({
   declarations: [
