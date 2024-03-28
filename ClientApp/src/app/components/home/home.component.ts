@@ -17,12 +17,11 @@ export class HomeComponent implements OnInit {
   private _authService: AuthService = inject(AuthService);
   public user: Observable<User | null> = of(null);
   public isLoggedIn: boolean = false;
-  // public user: User | null = null;
+
 
   ngOnInit(): void {
-    // this.user = this._authService.curUserVal;
-    this.user = this._authService.curUser;
-    this._authService.curUser.subscribe(res => {
+      this.user = this._authService.curUser;
+      this._authService.curUser.subscribe(res => {
       this.isLoggedIn = (res ? true : false);
     });
   }

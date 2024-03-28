@@ -7,8 +7,6 @@ import { EmailLoginDetails } from '../../models/email-login-details';
 
 @Component({
   selector: 'app-register',
-  // standalone: true,
-  // imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -33,22 +31,18 @@ export class RegisterComponent implements OnInit {
 
   }
   ngOnInit(): void {
-    // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.signupForm.controls; }
 
   onSubmit(): void {
     this.submitted = true;
-    
-    // stop here if form is invalid
+
     if (this.signupForm.invalid) {
       return;
     }
 
-    // stop here if form is filled out incorrectly
     if(this.f['password'].value !== this.f['repeatPassword'].value){  
       this.f['repeatPassword'].setErrors({'match':false});
       this.f['password'].setErrors({'match':false});
@@ -56,9 +50,7 @@ export class RegisterComponent implements OnInit {
       return;
   }
 
-  // Create an instance of our EmailLoginDetails model to send to the
-  // backend server. This EmailLoginDetails object is of the structure the server
-  // expects to receive.
+
   const credentials: EmailLoginDetails = { 
     email: this.f['username'].value, 
     password: this.f['password'].value
@@ -74,7 +66,6 @@ export class RegisterComponent implements OnInit {
                 this.signupForm.reset();
             }else{
                 this._router.navigate([this.returnUrl]);
-                // console.log(data);
             }
               
           },

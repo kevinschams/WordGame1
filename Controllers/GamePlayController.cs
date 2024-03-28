@@ -12,7 +12,7 @@ using System.Security.Claims;
 
 namespace WordGame.Controllers
 {
-    [Authorize] // Ensure only authenticated users can access endpoints on this controller
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class GamePlayController : ControllerBase
@@ -29,7 +29,6 @@ namespace WordGame.Controllers
             _userManager = userManager;
 
             string jsonFilePath = "../WordGame1/Assets/wordlist.json";
-            // Console.WriteLine(jsonFilePath);
             string json = System.IO.File.ReadAllText(jsonFilePath);
             _wordList = JsonSerializer.Deserialize<WordList>(json);
         }
@@ -50,7 +49,7 @@ namespace WordGame.Controllers
                     Guesses = g.Guesses,
                     View = g.View,
                     RemainingGuesses = g.RemainingGuesses,
-                    Target = g.Status == "Win" || g.Status == "Loss" ? g.Target : null // Only include the Target property if status is 'Win' or 'Loss'
+                    Target = g.Status == "Win" || g.Status == "Loss" ? g.Target : null 
                 })
                 .ToList();
 
@@ -128,7 +127,6 @@ namespace WordGame.Controllers
         if (game == null)
             return NotFound(); 
 
-        // Check if the guess is correct and update the view property
         var target = game.Target.ToLower();
         var guessChar = char.ToLower(guess[0]);
         var viewChars = game.View.ToCharArray();
@@ -142,7 +140,6 @@ namespace WordGame.Controllers
             }
         }
 
-        // Update game state based on guess
         if(true)
         {
             game.RemainingGuesses--;

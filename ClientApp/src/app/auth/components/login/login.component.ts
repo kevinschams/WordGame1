@@ -8,8 +8,6 @@ import { User } from '../../models/user';
 
 @Component({
   selector: 'app-login',
-  // standalone: true,
-  // imports: [CommonModule, RouterModule, FormsModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -36,24 +34,18 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {                        
-    // get return url from route parameters or default to '/'
     this.returnUrl = this._route.snapshot.queryParams['returnUrl'] || '/';        
   }
 
-  // convenience getter for easy access to form fields
   get f() { return this.loginForm.controls; }
 
   onSubmit() {
     this.submitted = true;
-    // console.log("here");
-    // stop here if form is invalid
+
     if (this.loginForm.invalid) {
         return;
     }
 
-    // Create an instance of our EmailLoginDetails model to send to the
-    // backend server. This EmailLoginDetails object is of the structure the server
-    // expects to receive.
     const credentials: EmailLoginDetails = {
       email: this.f['username'].value, 
       password: this.f['password'].value
@@ -77,10 +69,8 @@ this._authService.login(credentials)
     },
     error: (errResp) => {
       if (errResp.error instanceof Array) {
-        // console.log(errResp.error);
         this.errors = errResp.error;
       } else if (errResp.error.message) {
-        // console.log(errResp.error.message);
         this.errors.push(errResp.error.message);
       } else {
         this.errors.push("An error occurred during login. Please try again.");

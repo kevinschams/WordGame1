@@ -2,7 +2,7 @@ export interface GameDto {
     gameId: number;
     applicationUserId: string;
     status: string;
-    guesses: number;
+    guesses: string;
     view: string;
     remainingGuesses: number;
     target: string;
