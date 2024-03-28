@@ -146,6 +146,7 @@ namespace WordGame.Controllers
         if(true)
         {
             game.RemainingGuesses--;
+            game.Guesses += guessChar;
         }
 
         // Update game view and status

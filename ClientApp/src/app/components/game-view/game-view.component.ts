@@ -122,7 +122,7 @@ export class GameViewComponent implements OnInit {
     this.route.params.pipe(
       switchMap(params => {
         const gameId = +params['id'];
-        return gameId ? this._gameService.getSingleGame(gameId) : of(null); // Return null if gameId is falsy
+        return gameId ? this._gameService.getSingleGame(gameId) : of(null);
       })
     ).subscribe(game => {
       // Set currentGame$ with the emitted game
@@ -136,22 +136,12 @@ export class GameViewComponent implements OnInit {
         console.log('Guess made: ', updatedGame);
         this.guessesRemaining--;
         this.currentGuess = '';
-        // console.log(updatedGame.g)
-        // updatedGame.remainingGuesses--;
-        
-        // this.guessesRemaining = updatedGame.remainingGuesses;
-        console.log(updatedGame.target);
-        // this.endTarget = updatedGame.target;
-        updatedGame.guesses = this.guessesRemaining;
-        // console.log(updatedGame.remainingGuesses);
-        // console.log(updatedGame.guesses);
-        // console.log(this.guessesRemaining);
+        updatedGame.remainingGuesses = this.guessesRemaining;
 
-        if (updatedGame.guesses === 0) {
+        if (updatedGame.remainingGuesses === 0) {
           updatedGame.status = 'Loss';
         }
 
-        // Update currentGame$ observable with the updated game
         this.currentGame$ = of(updatedGame);
       },
       error => {

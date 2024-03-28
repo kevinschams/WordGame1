@@ -18,12 +18,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let game of gameList$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win'}" (click)="navigateToGame(game.gameId)">
-          <td class="border px-4 py-2">{{ game.gameId }}</td>
-          <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
-          <td class="border px-4 py-2">{{ game.view }}</td>
-          <td class="border px-4 py-2">{{ game.target }}</td>
-          <td class="border px-4 py-2">{{ game.status }}</td>
+        <tr *ngFor="let game of gameList$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win'}" >
+          <td class="border px-4 py-2" (click)="navigateToGame(game.gameId)">{{ game.gameId }}</td>
+          <td class="border px-4 py-2" (click)="navigateToGame(game.gameId)">{{ game.remainingGuesses }}</td>
+          <td class="border px-4 py-2" (click)="navigateToGame(game.gameId)">{{ game.view }}</td>
+          <td class="border px-4 py-2" (click)="navigateToGame(game.gameId)">{{ game.target }}</td>
+          <td class="border px-4 py-2" (click)="navigateToGame(game.gameId)">{{ game.status }}</td>
           <td class="border px-4 py-2">
             <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
                 (click)="deleteGame(game.gameId)">Delete</button>

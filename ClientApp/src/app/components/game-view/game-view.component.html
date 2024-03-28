@@ -1,18 +1,4 @@
-<!-- <div class="flex flex-col items-center justify-center">
-  <div *ngIf="currentGame$ | async as currentGame" class="text-center">
-    <h1>{{ currentGame.target }}</h1>
-    
-    <br>
-    <h1 class="mb-2 font-bold text-3xl">Guesses Remaining: {{ guessesRemaining }}</h1>
-    
-    <h1 *ngIf="currentGame.status === 'Unfinished'" class="mb-2 font-bold text-3xl">{{ currentGame.view }}</h1><br>
-    <input *ngIf="currentGame.status === 'Unfinished'" type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="mb-2 px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500"><br>
-    <button *ngIf="currentGame.status === 'Unfinished'" (click)="makeGuess(currentGame.gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Guess</button>
-    <p *ngIf="currentGame.status === 'Loss'" class="mb-2">YOU LOST!!!</p>
-    
-    <p *ngIf="currentGame.status === 'Win'" class="mb-2">YOU WIN!!!</p>
-  </div>
-</div> -->
+
 <div class="flex flex-col items-center justify-start h-screen">
   <div *ngIf="currentGame$ | async as currentGame" class="game-details bg-gray-100 p-6 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4">Game Details</h2>
@@ -21,7 +7,7 @@
       <li><strong>Phrase:</strong> {{ currentGame.view }}</li>
       <li><strong>Remaining Guesses:</strong> {{ currentGame.remainingGuesses }}</li>
       <li><strong>Status:</strong> {{ currentGame.status }}</li>
-      <!-- Add more details as needed -->
+      <li><strong>Previous Guesses: </strong> {{ currentGame.guesses }}</li>
     </ul>
 
     <div *ngIf="currentGame.status === 'Unfinished'" class="mt-4">
