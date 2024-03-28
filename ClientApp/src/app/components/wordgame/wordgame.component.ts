@@ -59,6 +59,11 @@ export class WordgameComponent implements OnInit {
       }
     );
   }
+
+  navigateToGame(gameId: number) {
+    this.router.navigate(['/games', gameId.toString()]);
+  }
+  
 }
 @NgModule({
   declarations: [

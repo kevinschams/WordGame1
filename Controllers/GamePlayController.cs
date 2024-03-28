@@ -28,34 +28,13 @@ namespace WordGame.Controllers
             _context = context;
             _userManager = userManager;
 
-            // Load word list from JSON file
-            // string jsonFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "wordlist.json");
             string jsonFilePath = "../WordGame1/Assets/wordlist.json";
             // Console.WriteLine(jsonFilePath);
             string json = System.IO.File.ReadAllText(jsonFilePath);
             _wordList = JsonSerializer.Deserialize<WordList>(json);
-            // _wordList = ReadWordList();
         }
 
 
-        // [HttpGet]
-        // public IActionResult GetAllGames()
-        // {
-        //     var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-        //     // var userId = _userManager.GetUserId(User);
-
-        //     var games = _context.Games.Where(g => g.ApplicationUserId == userId).Select(g => new GameDto
-        //     {
-        //         GameId = g.GameId,
-        //         ApplicationUserId = g.ApplicationUserId,
-        //         Status = g.Status,
-        //         Guesses = g.Guesses,
-        //         View = g.View,
-        //         RemainingGuesses = g.RemainingGuesses,
-        //         Target = g.Target
-        //     }).ToList();
-        //     return Ok(games);
-        // }
         [HttpGet]
         public IActionResult GetAllGames()
         {
@@ -83,10 +62,9 @@ namespace WordGame.Controllers
         public IActionResult GetSingleGame(int gameId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            // var userId = _userManager.GetUserId(User);
             var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
             if (game == null)
-                return NotFound(); // Game not found or not owned by the user
+                return NotFound(); 
             var gameDto = new GameDto
             {
                 GameId = game.GameId,
@@ -104,9 +82,9 @@ namespace WordGame.Controllers
         public IActionResult CreateNewGame()
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            // var userId = _userManager.GetUserId(User);
+
             var random = new Random();
-            var difficulty = "med"; // Adjust as needed based on your game logic
+            var difficulty = "med"; 
             var targetList = GetWordList(difficulty);
             var target = targetList[random.Next(0, targetList.Count)];
 
@@ -139,7 +117,6 @@ namespace WordGame.Controllers
                 Target = word
             };
 
-            // return CreatedAtAction(nameof(GetSingleGame), new { gameId = game.GameId }, gameDto);
             return Ok(gameDto);
         }
 
@@ -149,7 +126,7 @@ namespace WordGame.Controllers
         var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
         var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
         if (game == null)
-            return NotFound(); // Game not found or not owned by the user
+            return NotFound(); 
 
         // Check if the guess is correct and update the view property
         var target = game.Target.ToLower();
@@ -166,7 +143,6 @@ namespace WordGame.Controllers
         }
 
         // Update game state based on guess
-        // if (!found)
         if(true)
         {
             game.RemainingGuesses--;
@@ -202,7 +178,6 @@ namespace WordGame.Controllers
             Target = word
         };
 
-        // Return the updated GameDto object
         return Ok(gameDto);
     }
 
@@ -210,10 +185,9 @@ namespace WordGame.Controllers
         public IActionResult DeleteGame(int gameId)
         {
             var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
-            // var userId = _userManager.GetUserId(User);
             var game = _context.Games.FirstOrDefault(g => g.GameId == gameId && g.ApplicationUserId == userId);
             if (game == null)
-                return NotFound(); // Game not found or not owned by the user
+                return NotFound(); 
 
             _context.Games.Remove(game);
             _context.SaveChanges();
@@ -221,7 +195,6 @@ namespace WordGame.Controllers
             return NoContent();
         }
 
-        // Helper method to get word list based on difficulty
         private List<string> GetWordList(string difficulty)
         {
             switch (difficulty.ToLower())
@@ -237,7 +210,7 @@ namespace WordGame.Controllers
                 case "hard":
                     return _wordList.Hard;
                 default:
-                    return _wordList.Easy; // Default to easy if difficulty is not recognized
+                    return _wordList.Easy; 
             }
         }
 

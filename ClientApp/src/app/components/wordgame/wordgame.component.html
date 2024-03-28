@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let game of gameList$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win' }">
+        <tr *ngFor="let game of gameList$ | async" class="text-center" [ngClass]="{ 'bg-red-100': game.status === 'Loss', 'bg-green-100': game.status === 'Win'}" (click)="navigateToGame(game.gameId)">
           <td class="border px-4 py-2">{{ game.gameId }}</td>
           <td class="border px-4 py-2">{{ game.remainingGuesses }}</td>
           <td class="border px-4 py-2">{{ game.view }}</td>
