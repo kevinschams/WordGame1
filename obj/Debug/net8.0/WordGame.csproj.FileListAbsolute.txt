@@ -1643,3 +1643,4 @@ C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\asp_do
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\asp_dotnet\asp_dotnet_spring_2024_student\WordGame1\obj\Debug\net8.0\WordGame.genruntimeconfig.cache
 C:\Users\003035632\OneDrive - Western Wisconsin Technical College\Desktop\asp_dotnet\asp_dotnet_spring_2024_student\WordGame1\obj\Debug\net8.0\ref\WordGame.dll
 C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\bin\Debug\net8.0\package-lock.json
+C:\Users\kevin\OneDrive\Desktop\FIFTH_SEM\WordGame1\bin\Debug\net8.0\package.json
