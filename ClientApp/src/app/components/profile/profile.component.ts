@@ -23,7 +23,7 @@ export class ProfileComponent implements OnInit{
     // Chart data
   public chartData: number[] = [];
   public chartLabels: string[] = ['Won', 'Lost', 'Unfinished'];
-  // constructor(private _gameService: GameService) {} // Inject GameService in the constructor
+  
 
   public getAllGames(): void{
     this._gameService.getAllGames();
