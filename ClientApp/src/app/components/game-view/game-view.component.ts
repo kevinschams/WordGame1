@@ -1,5 +1,5 @@
 import { Component, NgModule, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { GameDto } from '../../models/gameDto';
@@ -22,7 +22,7 @@ export class GameViewComponent implements OnInit {
 
   public currentGame$: Observable<GameDto | null> = of(null);
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private router: Router) {}
 
   ngOnInit(): void {
     this.getSingleGame();
@@ -57,6 +57,10 @@ export class GameViewComponent implements OnInit {
         console.error('Error making guess: ', error);
       }
     );
+  }
+
+  goBackToGameList() {
+    this.router.navigate(['/wordgame']); // Replace '/game-list' with the actual route you want to navigate to
   }
 }
 

@@ -1,4 +1,35 @@
+<div class="container mx-auto px-4 py-8">
+  <div *ngIf="currentGame$ | async as currentGame" class="game-details bg-gray-100 p-6 rounded-lg shadow-md">
+    <h2 class="text-3xl font-bold mb-4 text-center">Game {{currentGame.gameId}}</h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div>
+        <p><strong>Game ID:</strong> {{ currentGame.gameId }}</p>
+        <p><strong>Phrase:</strong> {{ currentGame.view }}</p>
+        <p><strong>Remaining Guesses:</strong> {{ currentGame.remainingGuesses }}</p>
+        <p><strong>Status:</strong> {{ currentGame.status }}</p>
+        <p><strong>Previous Guesses:</strong> {{ currentGame.guesses }}</p>
+      </div>
+      <div class="flex justify-center items-center">
+        <div *ngIf="currentGame.status === 'Unfinished'" class="mt-4">
+          <input type="text" [(ngModel)]="currentGuess" placeholder="Enter your guess" class="px-4 py-2 rounded border border-gray-300 focus:outline-none focus:ring focus:border-blue-500">
+          <button (click)="makeGuess(currentGame.gameId)" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2">Guess</button>
+        </div>
+        <div *ngIf="currentGame.status === 'Loss'" class="mt-4">
+          <p class="text-red-600 font-bold">Sorry, you lost!</p>
+          <p>The correct answer was: {{currentGame.target}}</p>
+        </div>
+        <div *ngIf="currentGame.status === 'Win'" class="mt-4">
+          <p class="text-green-600 font-bold">Congratulations, you won!</p>
+        </div>
+      </div>
+      <div>
+        <button (click)="goBackToGameList()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700">Go Back To Game List</button>
+      </div>
+    </div>
+  </div>
+</div>
 
+<!-- 
 <div class="flex flex-col items-center justify-start h-screen">
   <div *ngIf="currentGame$ | async as currentGame" class="game-details bg-gray-100 p-6 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4">Game Details</h2>
@@ -24,6 +55,9 @@
       <p class="text-blue-600 font-bold">Target Word: {{currentGame.target}}</p>
       <p class="text-green-600 font-bold">Congratulations, you won!</p>
     </div>
+    <div *ngIf="currentGame.status === 'Loss' || currentGame.status === 'Win'">
+      <button (click)="goBackToGameList()" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-700 ml-2">Go Back To Game List</button>
+    </div>
   </div>
 </div>
 
@@ -34,4 +68,4 @@
 
 
 
-  
+   -->
