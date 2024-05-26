@@ -2,50 +2,72 @@ import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { GameService } from '../../auth/services/gameService';
 import { GameDto } from '../../models/gameDto';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators'; // Import the map operator
+import { map } from 'rxjs/operators'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Chart } from 'chart.js'; 
+import * as Highcharts from 'highcharts'; // Import Highcharts
 
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.css'
+  styleUrls: ['./profile.component.css']
 })
-export class ProfileComponent implements OnInit{
-  private _gameService = inject(GameService); 
-  public gameList$: Observable<GameDto[]> = this._gameService.currentGame$; // Remove the | [] type
+export class ProfileComponent implements OnInit {
+  private _gameService = inject(GameService);
+  public gameList$: Observable<GameDto[]> = this._gameService.currentGame$;
 
-  public wonGames$: Observable<GameDto[]> = new Observable<GameDto[]>();; // Observable for won games
-  public lostGames$: Observable<GameDto[]> = new Observable<GameDto[]>();; // Observable for lost games
-  public unfinishedGames$: Observable<GameDto[]> = new Observable<GameDto[]>();; // Observable for unfinished games
+  public wonGames: GameDto[] = [];
+  public lostGames: GameDto[] = [];
+  public unfinishedGames: GameDto[] = [];
 
-    // Chart data
-  public chartData: number[] = [];
-  public chartLabels: string[] = ['Won', 'Lost', 'Unfinished'];
-  
-
-  public getAllGames(): void{
-    this._gameService.getAllGames();
-  }
+  constructor() {}
 
   ngOnInit(): void {
     this.getAllGames();
-    this.filterGames(); // Call the method to filter games
+    this.filterGames();
+    // this.renderPieChart();
   }
 
+  public getAllGames(): void {
+    this._gameService.getAllGames();
+  }
+
+  // private filterGames(): void {
+  //   this.gameList$.subscribe(games => {
+  //     this.wonGames = games.filter(game => game.status === 'Win');
+  //     this.lostGames = games.filter(game => game.status === 'Loss');
+  //     this.unfinishedGames = games.filter(game => game.status === 'Unfinished');
+  //   });
+  // }
   private filterGames(): void {
-    this.wonGames$ = this.gameList$.pipe(
-      map(games => games.filter(game => game.status === 'Win'))
-    );
+    this.gameList$.subscribe(games => {
+      this.wonGames = games.filter(game => game.status === 'Win');
+      this.lostGames = games.filter(game => game.status === 'Loss');
+      this.unfinishedGames = games.filter(game => game.status === 'Unfinished');
+  
+      this.renderPieChart(); // Render the chart after data is available
+    });
+  }
 
-    this.lostGames$ = this.gameList$.pipe(
-      map(games => games.filter(game => game.status === 'Loss'))
-    );
-
-    this.unfinishedGames$ = this.gameList$.pipe(
-      map(games => games.filter(game => game.status === 'Unfinished'))
-    );
+  private renderPieChart(): void {
+    Highcharts.chart('pieChartContainer', {
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Games Summary'
+      },
+      series: [{
+        type: 'pie',
+        name: 'Games',
+        data: [
+          { name: 'Won', y: this.wonGames.length },
+          { name: 'Lost', y: this.lostGames.length },
+          { name: 'Unfinished', y: this.unfinishedGames.length }
+        ]
+      }]
+    });
   }
 }
 

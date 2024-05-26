@@ -1,36 +1,17 @@
-<!-- <div *ngIf="(gameList$ | async) as games">
-    <h2>Total games played: {{ games.length }}</h2>
-
-    
-  </div>
- -->
- <div *ngIf="(gameList$ | async) as games">
-    <h2>Total games played: {{ games.length }}</h2>
-  
-    <div *ngIf="(wonGames$ | async) as wonGames">
-      <h3>Won Games: {{ wonGames.length }}</h3>
-    </div>
-  
-    <div *ngIf="(lostGames$ | async) as lostGames">
-      <h3>Lost Games: {{ lostGames.length }}</h3>
-    </div>
-  
-    <div *ngIf="(unfinishedGames$ | async) as unfinishedGames">
-      <h3>Unfinished Games: {{ unfinishedGames.length }}</h3>
-    </div>
-  </div>
-  <div *ngIf="(gameList$ | async) as games">
+<div *ngIf="(gameList$ | async) as games">
   <h2>Total games played: {{ games.length }}</h2>
+  <!-- <div id="pieChartContainer" style="min-width: 300px; max-width: 800px; height: 400px; margin: 0 auto;"></div> -->
+  <!-- <div *ngIf="(wonGames$ | async) as wonGames">
+    <h3>Won Games: {{ wonGames.length }}</h3>
+  </div>
 
+  <div *ngIf="(lostGames$ | async) as lostGames">
+    <h3>Lost Games: {{ lostGames.length }}</h3>
+  </div>
 
+  <div *ngIf="(unfinishedGames$ | async) as unfinishedGames">
+    <h3>Unfinished Games: {{ unfinishedGames.length }}</h3>
+  </div> -->
 </div>
-<!-- <div class="chart-container">
-  <canvas baseChart
-          [data]="chartData"
-          [labels]="chartLabels"
-          [chartType]="'doughnut'"
-          [options]="chartOptions"
-          [legend]="chartLegend">
-  </canvas>
-</div> -->
+<div id="pieChartContainer" style="min-width: 300px; max-width: 800px; height: 400px; margin: 0 auto;"></div>
 
