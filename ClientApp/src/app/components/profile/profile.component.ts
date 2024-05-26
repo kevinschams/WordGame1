@@ -5,7 +5,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Chart } from 'chart.js'; 
 import * as Highcharts from 'highcharts'; // Import Highcharts
 
 @Component({
