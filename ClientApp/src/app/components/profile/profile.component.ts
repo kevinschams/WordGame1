@@ -49,6 +49,33 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+  // private renderPieChart(): void {
+  //   const totalGames = this.wonGames.length + this.lostGames.length + this.unfinishedGames.length;
+  
+  //   Highcharts.chart('pieChartContainer', { // Make sure to pass an object with chart options
+  //     chart: {
+  //       type: 'pie'
+  //     },
+  //     title: {
+  //       text: 'Games Summary'
+  //     },
+  //     tooltip: {
+  //       pointFormat: '{series.name}: <b>{point.y}</b> ({point.percentage:.1f}%)'
+  //     },
+  //     series: [{
+  //       type: 'pie',
+  //       name: 'Games',
+  //       data: [
+  //         { name: 'Won', y: this.wonGames.length, percentage: (this.wonGames.length / totalGames) * 100 },
+  //         { name: 'Lost', y: this.lostGames.length, percentage: (this.lostGames.length / totalGames) * 100 },
+  //         { name: 'Unfinished', y: this.unfinishedGames.length, percentage: (this.unfinishedGames.length / totalGames) * 100 }
+  //       ]
+  //     }]
+  //   });
+  // }
+  
+
+
   private renderPieChart(): void {
     Highcharts.chart('pieChartContainer', {
       chart: {
@@ -68,6 +95,7 @@ export class ProfileComponent implements OnInit {
       }]
     });
   }
+
 }
 
 @NgModule({
