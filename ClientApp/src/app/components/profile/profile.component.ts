@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators'; 
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import * as Highcharts from 'highcharts'; // Import Highcharts
+import * as Highcharts from 'highcharts'; 
 
 @Component({
   selector: 'app-profile',
@@ -25,20 +25,13 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.getAllGames();
     this.filterGames();
-    // this.renderPieChart();
   }
 
   public getAllGames(): void {
     this._gameService.getAllGames();
   }
 
-  // private filterGames(): void {
-  //   this.gameList$.subscribe(games => {
-  //     this.wonGames = games.filter(game => game.status === 'Win');
-  //     this.lostGames = games.filter(game => game.status === 'Loss');
-  //     this.unfinishedGames = games.filter(game => game.status === 'Unfinished');
-  //   });
-  // }
+
   private filterGames(): void {
     this.gameList$.subscribe(games => {
       this.wonGames = games.filter(game => game.status === 'Win');
