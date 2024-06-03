@@ -1,4 +1,3 @@
-
 import { Component, NgModule, OnInit, inject } from '@angular/core';
 import { GameService } from '../../auth/services/gameService';
 import { GameDto } from '../../models/gameDto';
