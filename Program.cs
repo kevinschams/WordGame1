@@ -35,27 +35,6 @@
 //     app.UseHsts();
 // }
 
-// app.UseHttpsRedirection();
-// app.UseStaticFiles();
-
-// app.UseRouting();
-
-// app.UseAuthorization();
-
-// app.MapControllerRoute(
-//     name: "default",
-//     pattern: "{controller=Home}/{action=Index}/{id?}");
-// app.MapRazorPages();
-
-// app.MapFallbackToFile("index.html");
-
-// app.Run();
-
-// using Microsoft.AspNetCore.Identity;
-// using Microsoft.EntityFrameworkCore;
-// using WordGame.Data;
-// using WordGame.Models; // Import the ApplicationUser class
-
 
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
